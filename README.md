@@ -41,11 +41,5 @@ Show sync status: `docker-compose exec bsc /usr/bin/geth attach http://127.0.0.1
 
 # Polygon
 
-This Docker compose file runs Polygon (previously Matic) EVM node locally. The EVM network is also known as **Bor** and it is an Go Ethereum (geth) clone.
-
-* Based on [the recipe by Chase Wright](https://chasewright.com/how-to-run-a-polygon-matic-mainnet-node/)
-
-* Maps JSON-RPC to port `8546` to avoid conflict with any existing EVM, like Ethereum mainnet, running on the same server
-
-TODO
+Please see [Polygon DAppNode compose here](https://github.com/MysticRyuujin/dappnode-polygon).
 
