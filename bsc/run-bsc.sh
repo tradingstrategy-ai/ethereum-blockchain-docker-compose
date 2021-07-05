@@ -28,7 +28,6 @@ geth \
   --config /config.toml \
   --datadir . \
   --http.port 9545 \
-  --verbosity 9 \
   --syncmode=snap
 
 #  --pprof \
