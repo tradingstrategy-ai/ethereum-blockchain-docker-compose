@@ -8,7 +8,7 @@ This repository contains Docker Compose file to run various EVM based blockchain
 
 * RPC ports 9545 (HTTP), 9546 (Websockets), 9547 (GraphQL)
 
-* Data volume `./data/bsc`
+* Data is stored in a host folder `./data/bsc`
 
 * [Documentation](https://docs.binance.org/smart-chain/developer/fullnode.html)
 
