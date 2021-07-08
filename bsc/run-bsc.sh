@@ -28,10 +28,7 @@ geth \
   --config /config.toml \
   --datadir . \
   --http.port 9545 \
-  --gcmode archive \
-  --verbosity 9 \
-  --syncmode=fast
-  --
+  --syncmode=snap
 
 #  --pprof \
 #  --metrics \
