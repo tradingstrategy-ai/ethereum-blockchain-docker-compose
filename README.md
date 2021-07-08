@@ -1,12 +1,36 @@
 This repository contains Docker Compose file to run various EVM based blockchains.
 
+# Ethereum mainnet 
+
+* Based on the official [GoEthereum Docker image](https://hub.docker.com/r/ethereum/client-go)
+
+* Network id: 1
+
+* RPC Port: 8545
+
+* Data volume: `./data/ethereum`
+
+## Commands
+
+Help: `docker-compose run ethereum --help`
+
+Shell: (not available)
+
+Build and run as daemon: `docker-compose up --build -d ethereum`
+
+Restart: `docker-compose restart ethereum`
+
+Logs: `docker-compose logs ethereum`
+
+(todo) Show sync status: `docker-compose run ethereum attach http://127.0.0.1:8545 --exec "eth.syncing"` 
+
 # Binance Smart Chain (BSC)
 
 * Based on [this recipe](https://github.com/ServerContainers/bsc)
 
 * Network id: 56
 
-* RPC ports 9545 (HTTP), 9546 (Websockets), 9547 (GraphQL)
+* RPC ports 9545 (HTTP), 9546 (Websockets)
 
 * Data volume `./data/bsc`
 

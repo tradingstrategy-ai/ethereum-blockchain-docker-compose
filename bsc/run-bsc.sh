@@ -31,6 +31,7 @@ geth \
   --gcmode archive \
   --verbosity 9 \
   --syncmode=fast
+  --
 
 #  --pprof \
 #  --metrics \
