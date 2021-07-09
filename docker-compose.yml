@@ -11,13 +11,15 @@ services:
     image: ethereum/client-go:v1.10.4
     restart: always
     container_name: ethereum
-    command: --http --cache 8000 --syncmode snap --graphql
+    ipc: shareable
+    command: --http --http.addr 0.0.0.0 --cache 8000 --syncmode snap --graphql --ipcpath=/root/ipc/ethereum.ipc
     volumes:
       - ./data/ethereum:/root/.ethereum
+      - ./ipc:/root/ipc
     ports:
       - "127.0.0.1:8545:8545" # HTTP
-      - "30303:30303"  # p2p
-      - "30303:30303/udp"
+      - "30303:30303" # p2p
+      - "30303:30303/udp" # p2p
 
   #
   # Binance smart chain geth

@@ -1,12 +1,16 @@
 This repository contains Docker Compose file to run various EVM based blockchains.
 
+The compose provides high speed inter-process communication sockets (IPC), on beside the normal HTTP JSON-RPC, for communicating with the nodes. 
+
 # Ethereum mainnet 
 
 * Based on the official [GoEthereum Docker image](https://hub.docker.com/r/ethereum/client-go)
 
 * Network id: 1
 
-* RPC Port: 8545
+* IPC socket: `./ipc/ethereum.ipc`
+
+* HTTP RPC Port: 8545
 
 * Data volume: `./data/ethereum`
 
@@ -30,7 +34,7 @@ Logs: `docker-compose logs ethereum`
 
 * Network id: 56
 
-* RPC ports 9545 (HTTP), 9546 (Websockets)
+* HTTP RPC ports 9545, 9546 (Websockets)
 
 * Data is stored in a host folder `./data/bsc`
 
