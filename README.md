@@ -71,3 +71,59 @@ Show sync status: `docker-compose exec bsc /usr/bin/geth attach http://127.0.0.1
 
 Please see [Polygon DAppNode compose here](https://github.com/MysticRyuujin/dappnode-polygon).
 
+# NVMe drivers and RAID0 on Hetzner
+
+Here is how to tpo configure your drives to RAID0 (max speed, no redundancy) on Hetzner.
+
+Boot a Hetzner server to a rescue mode.
+
+SSH in.
+
+Start installation
+
+```shell
+installimage
+```
+
+Choose Ubuntu 20.04.
+
+The editor will pop up and allow you to configure partitions.
+
+Set software raid settings
+
+```shell
+# RAID enabled
+SWRAID 1
+
+# Use  stripe mode
+SWRAIDLEVEL 0
+```
+
+Set the partition scheme as follow:
+
+```
+PART swap swap 32G
+PART /boot ext3 512M
+PART / xfs all
+```
+
+ext4 does not support large multi terabyte file systems, so we go with XFS. XFS might be even better for GoEthereum node like write loads.
+
+## Different disk sizes
+
+If you have different sizes disk, then disable installation raid by setting `SWRAID 0`.
+This is because RAID 0 goes by the smallest disk and you want to utilise all the capacity. 
+
+Use `mdadm` tool from the command line to create a RAID particion and mount it in a special mount point.
+
+- Create stripe partition with `mdadm`
+- `mkfs -f -t xfs /dev/md2`
+- `mkdir /bsc`
+- `blkid` to find out the UUID of `/dev/md2`
+- `nano /etc/fstab` and add the partition there
+- `mount -a` to verify `/etc/fstab` is good
+
+
+
+
+
