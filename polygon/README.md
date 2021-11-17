@@ -37,6 +37,13 @@ screen -r heimdallr -->  to join heimdallr session
 
 ```
 geth attach 168.119.211.163:8545
+
+# or
+geth attach http://mihailo.tradingstrategy.ai
+
+# or
+geth attach https://mihailo.tradingstrategy.ai
+
 ```
 
 ### Monitoring
