@@ -150,11 +150,22 @@ Cache should be half of the RAM.
 
 [diffsync was added in BSC geth 1.1.5](https://github.com/binance-chain/bsc/releases/tag/v1.1.5)
 
-[txlookuplimit 0 is needed to be able to fetch historical transactions](https://ethereum.stackexchange.com/questions/85261/is-ethereum-fast-sync-feasible-to-get-logs/85306#85306).
+[txlookuplimit 0 is needed to be able to fetch historical transactions](https://ethereum.stackexchange.com/questions/85261/is-ethereum-fast-sync-feasible-to-get-logs/85306#85306). 
+[txlookuplimit 0 also here in geth release notes](https://newreleases.io/project/github/ethereum/go-ethereum/release/v1.10.0).
+
+You can speed up a bit by adding the [following config.toml bit](https://github.com/binance-chain/bsc/issues/502#issuecomment-974785413):
+
+```toml
+[Eth]
+DisablePeerTxBroadcast = true
+```
+
+Make sure [StaticNodes in the config.toml contains the latest list](https://github.com/binance-chain/bsc/issues/544#issuecomment-974792305)
 
 ## BSC pruning instructions
 
-[See here](https://github.com/binance-chain/bsc/issues/502)
+[See here](https://github.com/binance-chain/bsc/issues/502).
+[See also pruning instructions for Polygon](https://forum.matic.network/t/bor-offline-pruning/1830).
 
 To prune:
 
