@@ -8,7 +8,7 @@ services:
   # https://github.com/Capgemini-AIE/ethereum-docker/blob/master/docker-compose-standalone.yml
   #
   ethereum:
-    image: ethereum/client-go:v1.10.4
+    image: ethereum/client-go:v1.10.6
     restart: always
     container_name: ethereum
     ipc: shareable
