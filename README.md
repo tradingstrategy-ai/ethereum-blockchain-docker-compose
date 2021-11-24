@@ -161,3 +161,14 @@ To prune:
 ```shell
 geth snapshot prune-state --datadir ./data/bsc
 ```
+
+## Monitoring node
+
+Use `atop` (`apt install atop`).
+
+You can see disk business in the stats. This is often the bottleneck for the node syncing.  
+
+```
+DSK |      nvme2n1  | busy     89%  |               | read   13669  | write   4630  |               | KiB/r     13  | KiB/w     62 |  MBr/s   18.3 |               |  MBw/s   28.3 |  avq     0.44 |               |  avio 0.49 ms |
+DSK |      nvme3n1  | busy     89%  |               | read   13532  | write   4166  |               | KiB/r     13  | KiB/w     66 |  MBr/s   17.7 |               |  MBw/s   27.0 |  avq     1.10 |               |  avio 0.50 ms |
+```
