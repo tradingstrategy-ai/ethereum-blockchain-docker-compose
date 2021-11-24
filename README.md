@@ -123,7 +123,41 @@ Use `mdadm` tool from the command line to create a RAID particion and mount it i
 - `nano /etc/fstab` and add the partition there
 - `mount -a` to verify `/etc/fstab` is good
 
+## BSC further info
 
+[Latest releases on Github](https://github.com/binance-chain/bsc/releases)
 
+BSC command:
 
+```shell
+./geth_linux \
+  --config ./config.toml \
+  --datadir ./data/bsc \
+  --cache 32000 \
+  --txlookuplimit 0 \
+  --http.port 9545 \
+  --http.addr 127.0.0.1 \
+  --http.vhosts=* \
+  --http.api=eth,net,web3,debug \
+  --graphql \
+  --graphql.vhosts=* \
+  --snapshot=false \
+  --diffsync \
+  --verbosity 3
+```
 
+Cache should be half of the RAM.
+
+[diffsync was added in BSC geth 1.1.5](https://github.com/binance-chain/bsc/releases/tag/v1.1.5)
+
+[txlookuplimit 0 is needed to be able to fetch historical transactions](https://ethereum.stackexchange.com/questions/85261/is-ethereum-fast-sync-feasible-to-get-logs/85306#85306).
+
+## BSC pruning instructions
+
+[See here](https://github.com/binance-chain/bsc/issues/502)
+
+To prune:
+
+```shell
+geth snapshot prune-state --datadir ./data/bsc
+```
