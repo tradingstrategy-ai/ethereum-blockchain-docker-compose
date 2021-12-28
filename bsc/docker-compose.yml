@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  bsc:
+    container_name: bsc
+    image: bsc:latest
+    volumes:
+        - /bsc/server/data-seed:/datadir
+        - /bsc:/dataconfig
+    ports:
+        - "9545:9545" # RPC
+    command:
+        - geth
+        - --config=/dataconfig/config.toml
+        - --datadir=/datadir
+        - --cache=32000
+        - --txlookuplimit=0
+        - --http.port=9545
+        - --http.addr=127.0.0.1
+        - --http.vhosts=*
+        - --http.api=eth,net,web3,debug
+        - --graphql
+        - --graphql.vhosts=*
+        - --snapshot=false
+        - --diffsync
+        - --verbosity=3
