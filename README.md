@@ -1,8 +1,8 @@
 This repository contains Docker Compose file to run various EVM based blockchains.
 
-The compose provides high speed inter-process communication sockets (IPC), on beside the normal HTTP JSON-RPC, for communicating with the nodes. 
+The compose provides high speed inter-process communication sockets (IPC), on beside the normal HTTP JSON-RPC, for communicating with the nodes.
 
-# Ethereum mainnet 
+# Ethereum mainnet
 
 * Based on the official [GoEthereum Docker image](https://hub.docker.com/r/ethereum/client-go)
 
@@ -16,6 +16,8 @@ The compose provides high speed inter-process communication sockets (IPC), on be
 
 ## Commands
 
+Access ethereum directory:  `cd ethereum`
+
 Help: `docker-compose run ethereum --help`
 
 Shell: (not available)
@@ -26,7 +28,7 @@ Restart: `docker-compose restart ethereum`
 
 Logs: `docker-compose logs ethereum`
 
-(todo) Show sync status: `docker-compose run ethereum attach http://127.0.0.1:8545 --exec "eth.syncing"` 
+(todo) Show sync status: `docker-compose run ethereum attach http://127.0.0.1:8545 --exec "eth.syncing"`
 
 # Binance Smart Chain (BSC)
 
@@ -51,7 +53,7 @@ Notes
 ## Commands
 
 BSC geth might take a minute or two before it starts to respond to port 9545.
-BSC logs seem to be very terse and you cannot get useful log output even with `-verbosity 5` - you cannot see from the logs if it is syncing or not. 
+BSC logs seem to be very terse and you cannot get useful log output even with `-verbosity 5` - you cannot see from the logs if it is syncing or not.
 
 Help: `docker-compose run bsc /usr/bin/geth --help`
 
@@ -65,7 +67,7 @@ Logs: `docker-compose logs bsc`
 
 Geth console: `docker-compose run bsc /usr/bin/geth attach http://127.0.0.1:9545`
 
-Show sync status: `docker-compose exec bsc /usr/bin/geth attach http://127.0.0.1:9545 --exec "eth.syncing"` 
+Show sync status: `docker-compose exec bsc /usr/bin/geth attach http://127.0.0.1:9545 --exec "eth.syncing"`
 
 # Polygon
 
@@ -112,7 +114,7 @@ ext4 does not support large multi terabyte file systems, so we go with XFS. XFS 
 ## Different disk sizes
 
 If you have different sizes disk, then disable installation raid by setting `SWRAID 0`.
-This is because RAID 0 goes by the smallest disk and you want to utilise all the capacity. 
+This is because RAID 0 goes by the smallest disk and you want to utilise all the capacity.
 
 Use `mdadm` tool from the command line to create a RAID particion and mount it in a special mount point.
 
@@ -150,7 +152,7 @@ Cache should be half of the RAM.
 
 [diffsync was added in BSC geth 1.1.5](https://github.com/binance-chain/bsc/releases/tag/v1.1.5)
 
-[txlookuplimit 0 is needed to be able to fetch historical transactions](https://ethereum.stackexchange.com/questions/85261/is-ethereum-fast-sync-feasible-to-get-logs/85306#85306). 
+[txlookuplimit 0 is needed to be able to fetch historical transactions](https://ethereum.stackexchange.com/questions/85261/is-ethereum-fast-sync-feasible-to-get-logs/85306#85306).
 [txlookuplimit 0 also here in geth release notes](https://newreleases.io/project/github/ethereum/go-ethereum/release/v1.10.0).
 
 You can speed up a bit by adding the [following config.toml bit](https://github.com/binance-chain/bsc/issues/502#issuecomment-974785413):
@@ -177,7 +179,7 @@ geth snapshot prune-state --datadir ./data/bsc
 
 Use `atop` (`apt install atop`).
 
-You can see disk business in the stats. This is often the bottleneck for the node syncing.  
+You can see disk business in the stats. This is often the bottleneck for the node syncing.
 
 ```
 DSK |      nvme2n1  | busy     89%  |               | read   13669  | write   4630  |               | KiB/r     13  | KiB/w     62 |  MBr/s   18.3 |               |  MBw/s   28.3 |  avq     0.44 |               |  avio 0.49 ms |
