@@ -1,0 +1,10 @@
+[Unit]
+Description=avalanchego
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=avalanchego --db-dir /avalanche/db
+
+[Install]
+WantedBy=multi-user.target
