@@ -1,0 +1,4 @@
+{
+  "log-level": "debug",
+  "db-dir": "/avalanche/db"
+}

@@ -73,6 +73,73 @@ Show sync status: `docker-compose exec bsc /usr/bin/geth attach http://127.0.0.1
 
 Please see [Polygon DAppNode compose here](https://github.com/MysticRyuujin/dappnode-polygon).
 
+# Avalanche
+
+Avalanchego is the oficial client that we use to create a fullnode on avalanche node. Currently we are using version
+
+official docs: https://docs.avax.network/nodes/build/run-avalanche-node-manually/
+
+## Requeriments
+
+Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
+
+CPU: Equivalent of 8 AWS vCPU
+RAM: 16 GiB
+Storage: 1 TB
+OS: Ubuntu 18.04/20.04 or MacOS >= Catalina
+
+## Avalanche C-chain Public Network Mainnet
+
+* Network Name: Avalanche Network
+
+* New RPC URL: https://api.avax.network/ext/bc/C/rpc
+
+* ChainID: 43114
+
+* Symbol: AVAX
+
+* Explorer: https://snowtrace.io/
+
+## Install avanlanchego
+
+add deb source
+
+`echo "deb https://downloads.avax.network/apt focal main" > /etc/apt/sources.list.d/avalanche.list`
+
+install as deb package
+
+`apt install avalanchego`
+
+We can create a specific config file look at /avalance/node.json in this repository to get a sample file.
+
+## Commands
+
+get version: `avalanchego --version`
+
+Build and run as daemon: look at /avalanche/avalanche.service
+
+Start Daemon: `sudo systemctl start avalanchego`
+
+Restart: `sudo systemctl restart avalanchego`
+
+Logs: `sudo journalctl -u avalanchego -f`
+
+(todo) Show sync status:
+
+```shell
+curl -X POST --data '{
+    "jsonrpc":"2.0",
+    "id"     :1,
+    "method" :"info.isBootstrapped",
+    "params": {
+        "chain":"X"
+    }
+}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+
+# response -> {"jsonrpc":"2.0","result":{"isBootstrapped":true},"id":1}
+
+```
+
 # NVMe drivers and RAID0 on Hetzner
 
 Here is how to tpo configure your drives to RAID0 (max speed, no redundancy) on Hetzner.
