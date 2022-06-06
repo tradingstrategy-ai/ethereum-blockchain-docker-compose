@@ -73,12 +73,83 @@ Show sync status: `docker-compose exec bsc /usr/bin/geth attach http://127.0.0.1
 
 Please see [Polygon DAppNode compose here](https://github.com/MysticRyuujin/dappnode-polygon).
 
+# Cronos
+
+Cronosd is the oficial client that we use to create a fullnode on cronos node. Currently we are using version
+
+official docs: https://cronos.org/docs/getting-started/cronos-mainnet.html#step-3-run-everything
+## Requeriments
+
+Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
+
+CPU: Equivalent of 8 AWS vCPU
+RAM: 16 GiB
+Storage: 1 TB
+OS: Ubuntu 18.04/20.04 or MacOS >= Catalina
+
+## Cronos Public Network Mainnet
+
+* Network Name: Avalanche Network
+
+* New RPC URL: https://evm-t3.cronos.org
+
+* ChainID: 25
+
+* Symbol: CRO
+
+* Explorer: https://cronoscan.com/
+
+## Install avanlanchego
+
+add deb source
+
+```shell
+curl -LOJ https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5_Linux_x86_64.tar.gz
+
+tar -zxvf cronos_0.6.5_Linux_x86_64.tar.gz
+
+./cronosd version
+
+0.6.5
+
+```
+
+Create a Service
+
+```shell
+  curl -s https://raw.githubusercontent.com/crypto-org-chain/cronos-docs/master/systemd/create-service.sh -o create-service.sh && curl -s https://raw.githubusercontent.com/crypto-org-chain/cronos-docs/master/systemd/cronosd.service.template -o cronosd.service.template
+
+  chmod +x ./create-service.sh && ./create-service.sh
+
+```
+
+We can create a specific config file look at /avalance/node.json in this repository to get a sample file.
+
+## Commands
+
+get version: `cronosd --version`
+
+Start Daemon: `sudo systemctl start cronosd`
+
+Restart: `sudo systemctl restart cronosd`
+
+Logs: `sudo journalctl -u cronosd -f`
+
+Get last block: `./cronosd status 2>&1 | jq '.SyncInfo.latest_block_height'` you can check if its correct with `curl -s https://rpc.cronos.org/commit | jq "{height: .result.signed_header.header.height}"
+
+(todo) Show sync status:
+
+```shell
+geth attach http://localhost:8545
+
+> eth.syncing
+
+```
 # Avalanche
 
 Avalanchego is the oficial client that we use to create a fullnode on avalanche node. Currently we are using version
 
 official docs: https://docs.avax.network/nodes/build/run-avalanche-node-manually/
-
 ## Requeriments
 
 Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
@@ -96,7 +167,7 @@ OS: Ubuntu 18.04/20.04 or MacOS >= Catalina
 
 * ChainID: 43114
 
-* Symbol: AVAX
+* Symbol: AVAXavalanche
 
 * Explorer: https://snowtrace.io/
 
@@ -139,6 +210,7 @@ curl -X POST --data '{
 # response -> {"jsonrpc":"2.0","result":{"isBootstrapped":true},"id":1}
 
 ```
+
 
 # NVMe drivers and RAID0 on Hetzner
 
