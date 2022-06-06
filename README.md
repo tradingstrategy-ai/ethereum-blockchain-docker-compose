@@ -80,7 +80,6 @@ Cronosd is the oficial client that we use to create a fullnode on cronos node. C
 official docs: https://cronos.org/docs/getting-started/cronos-mainnet.html#step-3-run-everything
 ## Requeriments
 
-Avalanche is an incredibly lightweight protocol, so nodes can run on commodity hardware. Note that as network usage increases, hardware requirements may change.
 
 CPU: Equivalent of 8 AWS vCPU
 RAM: 16 GiB
@@ -89,7 +88,7 @@ OS: Ubuntu 18.04/20.04 or MacOS >= Catalina
 
 ## Cronos Public Network Mainnet
 
-* Network Name: Avalanche Network
+* Network Name: Cronos Network
 
 * New RPC URL: https://evm-t3.cronos.org
 
@@ -100,8 +99,6 @@ OS: Ubuntu 18.04/20.04 or MacOS >= Catalina
 * Explorer: https://cronoscan.com/
 
 ## Install avanlanchego
-
-add deb source
 
 ```shell
 curl -LOJ https://github.com/crypto-org-chain/cronos/releases/download/v0.6.5/cronos_0.6.5_Linux_x86_64.tar.gz
@@ -114,7 +111,7 @@ tar -zxvf cronos_0.6.5_Linux_x86_64.tar.gz
 
 ```
 
-Create a Service
+Create as a Service
 
 ```shell
   curl -s https://raw.githubusercontent.com/crypto-org-chain/cronos-docs/master/systemd/create-service.sh -o create-service.sh && curl -s https://raw.githubusercontent.com/crypto-org-chain/cronos-docs/master/systemd/cronosd.service.template -o cronosd.service.template
