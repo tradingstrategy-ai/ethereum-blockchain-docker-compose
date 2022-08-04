@@ -29,7 +29,9 @@ Check that your GraphQL endpoint responds:
 
 ```
 
-# Example Caddyfile
+# Caddy
+
+## Example Caddyfile
 
 How to proxy Ethereum JSON-RPC node with Let's Encrypt TLS certificate and 
 HTTP Basic Auth password.
@@ -53,6 +55,16 @@ vitalik.tradingstrategy.ai {
 
 }
 ```
+
+## Validating Caddy config file
+
+Try:
+
+```shell
+caddy validate --config /etc/caddy/Caddyfile
+```
+
+
 
 
 # Ethereum mainnet
