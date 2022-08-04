@@ -29,6 +29,31 @@ Check that your GraphQL endpoint responds:
 
 ```
 
+# Example Caddyfile
+
+How to proxy Ethereum JSON-RPC node with Let's Encrypt TLS certificate and 
+HTTP Basic Auth password.
+
+```
+vitalik.tradingstrategy.ai {
+
+        # Create token using command line tools
+        basicauth {
+                admin xxx
+        }
+
+        reverse_proxy 127.0.0.1:8545
+        reverse_proxy /graphql 127.0.0.1:8545
+
+       # Set the default 404 page
+       # https://caddyserver.com/docs/caddyfile/directives/handle_errors
+       handle_errors {
+          respond "{http.error.status_code} {http.error.status_text}"
+      }
+
+}
+```
+
 
 # Ethereum mainnet
 
