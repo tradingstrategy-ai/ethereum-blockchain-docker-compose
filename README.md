@@ -2,6 +2,34 @@ This repository contains Docker Compose file to run various EVM based blockchain
 
 The compose provides high speed inter-process communication sockets (IPC), on beside the normal HTTP JSON-RPC, for communicating with the nodes.
 
+# Generic diagnostics commands
+
+## JSON RPC
+
+Check that your JSON-RPC endpot responds:
+
+```shell
+curl \
+  -H "Content-Type: application/json" \
+  --data "{\"jsonrpc\":\"2.0\",\"method\":\"net_version\",\"params\":[],\"id\":67}" \
+  https://yournode.example.com
+```
+
+Products
+
+```
+{"jsonrpc":"2.0","id":67,"result":"1"}
+```
+
+## GraphQL
+
+Check that your GraphQL endpoint responds:
+
+```shell
+
+```
+
+
 # Ethereum mainnet
 
 * Based on the official [GoEthereum Docker image](https://hub.docker.com/r/ethereum/client-go)
