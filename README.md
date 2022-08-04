@@ -1,4 +1,4 @@
-This repository contains Docker Compose file to run various EVM based blockchains.
+This repository contains Docker Compose file to run various EVM based blockchains with examples of Caddy reverse proxy.
 
 The compose provides high speed inter-process communication sockets (IPC), on beside the normal HTTP JSON-RPC, for communicating with the nodes.
 
