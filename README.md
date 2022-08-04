@@ -92,7 +92,8 @@ vitalik.tradingstrategy.ai {
         format json
       }
 
-}```
+}
+```
 
 ## Validating Caddy config file
 
