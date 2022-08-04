@@ -31,6 +31,8 @@ Check that your GraphQL endpoint responds:
 
 # Caddy
 
+Assume system wide Ubuntu install.
+
 ## Example Caddyfile
 
 How to proxy Ethereum JSON-RPC node with Let's Encrypt TLS certificate and 
@@ -64,8 +66,20 @@ Try:
 caddy validate --config /etc/caddy/Caddyfile
 ```
 
+## Display Caddy logs
 
+### System logs
 
+```shell
+journalctl -fu caddy
+```
+
+### Access logs 
+
+```shell
+less /var/log/caddy/vitalik.log
+less /var/log/caddy/access.log
+```
 
 # Ethereum mainnet
 
