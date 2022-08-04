@@ -23,11 +23,9 @@ Products
 
 ## GraphQL
 
-Check that your GraphQL endpoint responds:
+To diagnose, visit GraphQL UI provided by your node by default
 
-```shell
-
-```
+https://vitalik2.example.com/graphql/ui
 
 # Caddy
 
@@ -36,14 +34,47 @@ Assume system wide Ubuntu install.
 ## Example Caddyfile
 
 How to proxy Ethereum JSON-RPC node with Let's Encrypt TLS certificate and 
-HTTP Basic Auth password.
+HTTP Basic Auth password. This example provides two Ethereum nodes on the same server.
+
+Goes to `/etc/caddy/Caddyfile`:
 
 ```
+{
+    # Disable the Caddy admin API
+    # This is personal preference, you can remove this if desired
+    admin off
+    email no-reply@example.com
+
+}
+
+
+vitalik2.tradingstrategy.ai {
+
+    basicauth {
+		    myuser mytoken
+    }
+
+    reverse_proxy 127.0.0.1:10000
+    reverse_proxy /graphql 127.0.0.1:10000
+
+    # Set the default 404 page
+    # https://caddyserver.com/docs/caddyfile/directives/handle_errors
+    handle_errors {
+        respond "{http.error.status_code} {http.error.status_text}"
+    }
+
+    log {
+        output file /var/log/caddy/vitalik2.log
+        format json
+    }
+
+}
+
+
 vitalik.tradingstrategy.ai {
 
-        # Create token using command line tools
         basicauth {
-                admin xxx
+          		youruser yourtoken
         }
 
         reverse_proxy 127.0.0.1:8545
@@ -55,8 +86,13 @@ vitalik.tradingstrategy.ai {
           respond "{http.error.status_code} {http.error.status_text}"
       }
 
-}
-```
+      # Log startup messages
+      log {
+        output file /var/log/caddy/vitalik.log
+        format json
+      }
+
+}```
 
 ## Validating Caddy config file
 
