@@ -1,26 +1,32 @@
-version: '3.4'
+version: "3.4"
 
 services:
   bsc:
     container_name: bsc
-    image: bsc:latest
+    image: bsc
     volumes:
-        - /bsc/server/data-seed:/datadir
-        - /bsc:/dataconfig
+      - /bsc/data/server/data-seed:/datadir
+      - /bsc/data:/dataconfig
     ports:
-        - "9545:9545" # RPC
+      - "9545:9545" # RPC
+      - "30303:30303" # Peers (TCP)
+      - "30303:30303/udp" # Peers (UDP)
+    network_mode: "host"
     command:
-        - geth
-        - --config=/dataconfig/config.toml
-        - --datadir=/datadir
-        - --cache=32000
-        - --txlookuplimit=0
-        - --http.port=9545
-        - --http.addr=127.0.0.1
-        - --http.vhosts=*
-        - --http.api=eth,net,web3,debug
-        - --graphql
-        - --graphql.vhosts=*
-        - --snapshot=false
-        - --diffsync
-        - --verbosity=3
+      - geth
+      - --config=/dataconfig/config.toml
+      - --datadir=/datadir
+      - --cache=32000
+      - --txlookuplimit=0
+      - --http.port=9545
+      - --http.addr=0.0.0.0
+      - --http.corsdomain=*
+      - --http.vhosts=*
+      - --http.api=eth,net,web3,debug
+      - --graphql
+      - --graphql.vhosts=*
+      - --rpc
+      - --rpcaddr=0.0.0.0
+      - --snapshot=false
+      - --diffsync
+      - --verbosity=2
