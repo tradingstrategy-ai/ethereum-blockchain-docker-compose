@@ -1,7 +1,7 @@
 FROM debian:10
 
 ENV NETWORK=main
-ENV BSC_VERSION=v1.1.13
+ENV BSC_VERSION=v1.1.17
 
 RUN apt-get update
 RUN apt-get -y install wget unzip
