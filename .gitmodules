@@ -1,0 +1,3 @@
+[submodule "deps/erigon"]
+	path = deps/erigon
+	url = git@github.com:ledgerwatch/erigon.git
