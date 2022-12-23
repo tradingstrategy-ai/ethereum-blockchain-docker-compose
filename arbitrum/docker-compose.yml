@@ -7,7 +7,7 @@ services:
         restart: always
         stop_grace_period: 30s
         volumes:
-            - '/arbitrum/data/:/arbitrum-node/data/'	
+            - '/arbitrum-node/data/:/arbitrum-node/data/'	
         ports:
             - '8547:8547'
             - '8548:8548'
