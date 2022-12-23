@@ -7,15 +7,15 @@ services:
         restart: always
         stop_grace_period: 30s
         volumes:
-            - '/arbitrum-node/data/:/arbitrum-node/data/'	
+            - /arbitrum-node/data/:/arbitrum-node/data/
         ports:
-            - '8547:8547'
-            - '8548:8548'
+            - "127.0.0.1:8547:8547"
+            - "8548:8548"
         command:
-        - --init.url="https://snapshot.arbitrum.io/mainnet/nitro.tar"
+        - --init.url=https://snapshot.arbitrum.io/mainnet/nitro.tar
         - --persistent.chain=/arbitrum-node/data/
         - --persistent.global-config=/arbitrum-node/
-        - --l1.url= "$L1URL"
+        - --l1.url=$L1URL
         - --l2.chain-id=42161 
         - --http.api=net,web3,eth,debug 
         - --http.corsdomain=* 
