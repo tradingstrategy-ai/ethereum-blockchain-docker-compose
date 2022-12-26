@@ -12,7 +12,7 @@ services:
             - "127.0.0.1:8547:8547"
             - "8548:8548"
         command:
-        - --init.url=https://snapshot.arbitrum.io/mainnet/nitro.tar
+        - --init.url=file:/home/user/.arbitrum/nitro/Arbitrum.tar.lz4 
         - --persistent.chain=/arbitrum-node/data/
         - --persistent.global-config=/arbitrum-node/
         - --l1.url=$L1URL
