@@ -1,0 +1,79 @@
+{
+    # Disable the Caddy admin API
+    # This is personal preference, you can remove this if desired
+    admin off
+    email no-reply@example.com
+
+}
+
+
+vitalik2.tradingstrategy.ai {
+
+        basicauth {
+		admin JDJhJDE0JGEuVEZqOWp1QU9Jd0l5OTRFOW0wWU9wSlVBekd4UmNEM0w3eGFWekxBUEkvR1JRZkpZWmdh
+        }
+
+        reverse_proxy 127.0.0.1:10000
+        reverse_proxy /graphql 127.0.0.1:10000
+
+    # Set the default 404 page
+    # https://caddyserver.com/docs/caddyfile/directives/handle_errors
+    handle_errors {
+        respond "{http.error.status_code} {http.error.status_text}"
+    }
+
+    log {
+        output file /var/log/caddy/vitalik2.log
+        format json
+    }
+}
+
+
+# Beacon chain API exposed from Lighthouse port 5052
+http://vitalik2-beacon.tradingstrategy.ai {
+
+        basicauth {
+		admin JDJhJDE0JGEuVEZqOWp1QU9Jd0l5OTRFOW0wWU9wSlVBekd4UmNEM0w3eGFWekxBUEkvR1JRZkpZWmdh
+        }
+
+        reverse_proxy 127.0.0.1:5052
+
+    # Set the default 404 page
+    # https://caddyserver.com/docs/caddyfile/directives/handle_errors
+    handle_errors {
+        respond "{http.error.status_code} {http.error.status_text}"
+    }
+
+    log {
+        output file /var/log/caddy/vitalik2-beacon.log
+        format json
+    }
+
+}
+
+# https://caddyserver.com/docs/caddyfile
+
+
+vitalik.tradingstrategy.ai {
+
+        basicauth {
+		admin JDJhJDE0JGEuVEZqOWp1QU9Jd0l5OTRFOW0wWU9wSlVBekd4UmNEM0w3eGFWekxBUEkvR1JRZkpZWmdh
+        }
+
+        reverse_proxy 127.0.0.1:8545
+        reverse_proxy /graphql 127.0.0.1:8545
+
+       # Set the default 404 page
+       # https://caddyserver.com/docs/caddyfile/directives/handle_errors
+       handle_errors {
+          respond "{http.error.status_code} {http.error.status_text}"
+      }
+
+    # Log startup messages
+    log {
+        output file /var/log/caddy/vitalik.log
+        format json
+    }
+
+}
+
