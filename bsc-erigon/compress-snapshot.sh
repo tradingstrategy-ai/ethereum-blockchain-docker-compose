@@ -18,4 +18,4 @@ TARGET=/bsc/snapshot-2023-02.tar.zst
 # https://github.com/ledgerwatch/erigon/discussions/6891
 # For the description of this command see
 # https://stackoverflow.com/a/75483439/315168
-time (cd $DATA_DIR && tar -cf - chaindata bor nodes parlia snapshot | pv | zstd -f -T0 -8 -o $TARGET)
+time (cd $DATA_DIR && tar -cf - chaindata bor nodes parlia snapshots | pv | zstd -f -T0 -8 -o $TARGET)
