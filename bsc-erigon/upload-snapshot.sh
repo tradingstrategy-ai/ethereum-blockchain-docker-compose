@@ -22,8 +22,13 @@ set -e
 # The snapshot archive we are uploading
 TARGET=/bsc/snapshot-2023-02.tar.zst
 
+SHARED_FILENAME=bnb-chain-snapshot-2023-23.tar.zst
+
 # Created in the web UI
 BUCKET=bnb-chain-snapshot
 
 # Upload rate 20 MBytes/sec
-uplink cp $TARGET sj://$BUCKET
+uplink cp $TARGET sj://$BUCKET/$SHARED_FILENAME
+
+# Get a share URL
+uplink share --not-after=none --url sj://$BUCKET/SHARED_FILENAME
