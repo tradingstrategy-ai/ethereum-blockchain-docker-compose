@@ -31,4 +31,12 @@ BUCKET=bnb-chain-snapshot
 uplink cp $TARGET sj://$BUCKET/$SHARED_FILENAME
 
 # Get a share URL
-uplink share --not-after=none --url sj://$BUCKET/SHARED_FILENAME
+uplink share --not-after=none --url sj://$BUCKET/$SHARED_FILENAME
+
+# Get a public access grant
+echo "Curl link sharing"
+uplink share --not-after=none --url sj://$BUCKET/$SHARED_FILENAME
+
+
+echo "Access grant sharing"
+uplink share --not-after=none sj://$BUCKET/$SHARED_FILENAME
