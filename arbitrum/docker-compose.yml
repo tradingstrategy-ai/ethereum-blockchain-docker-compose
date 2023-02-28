@@ -21,6 +21,7 @@ services:
         - --http.corsdomain=* 
         - --http.addr=0.0.0.0 
         - --http.vhosts=*
+        - --graphql.enable
         logging:
           driver: json-file
           options:
