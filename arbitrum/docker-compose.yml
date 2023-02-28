@@ -22,6 +22,7 @@ services:
         - --http.addr=0.0.0.0 
         - --http.vhosts=*
         - --graphql.enable
+        - --graphql.vhosts=*
         logging:
           driver: json-file
           options:
