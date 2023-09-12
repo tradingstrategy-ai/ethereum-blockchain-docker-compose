@@ -1,3 +1,6 @@
 [submodule "deps/erigon"]
 	path = deps/erigon
 	url = git@github.com:ledgerwatch/erigon.git
+[submodule "deps/node"]
+	path = deps/node
+	url = git@github.com:base-org/node.git
