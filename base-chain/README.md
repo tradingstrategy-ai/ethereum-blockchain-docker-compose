@@ -82,3 +82,8 @@ docker logs -f --tail 100 [container id]
 ```
 docker compose start
 ```
+
+
+**You can read more about base in** ` https://docs.base.org/ ` 
+
+**Github**: `https://github.com/base-org/node`
