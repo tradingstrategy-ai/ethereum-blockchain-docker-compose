@@ -41,3 +41,44 @@ cd ethereum-blockchain-docker-compose/base
 docker-compose up -d --force-recreate
 ```
 
+## Step 5
+Check node sync:
+```
+echo Latest synced block behind by: $((($(date +%s)-$( \
+  curl -d '{"id":0,"jsonrpc":"2.0","method":"optimism_syncStatus"}' \
+  -H "Content-Type: application/json" http://localhost:7545 | \
+  jq -r .result.unsafe_l2.timestamp))/60)) minutes
+```
+
+Check last block:
+```
+date; curl -sX POST -H "Content-Type: application/json" \
+ -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id":1}' \
+https://mainnet.base.org/ \
+| jq -r ".result" | awk '{printf "%d\n", int($1)}'
+```
+
+### If you want to prune your node data:
+- Stop both op-geth & op-node:
+```
+docker compose stop
+```
+- Making sure the containers properly exited
+```
+docker compose ps -a 
+```
+- Run prune command:
+```
+docker-compose run -d geth /app/geth snapshot prune-state --datadir=/data
+
+stdout: [container id]
+```
+- Check the log for properly exiting the pruning
+note: this will take several hours and may look like it's frozen at times. It's not frozen - just leave it until it finishes.
+```
+docker logs -f --tail 100 [container id]
+```
+-  Start the op-node and op-geth services again
+```
+docker compose start
+```
