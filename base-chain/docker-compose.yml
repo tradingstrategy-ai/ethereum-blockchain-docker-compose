@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  geth: # this is Optimism's geth client
+    build: ../deps/node/
+    ports:
+      - 127.0.0.1:8545:8545       # RPC
+      - 127.0.0.1:8546:8546       # websocket
+      - 127.0.0.1:30303:30303     # P2P TCP (currently unused)
+      - 127.0.0.1:30303:30303/udp # P2P UDP (currently unused)
+      - 127.0.0.1:7301:6060       # metrics
+    command: [ "sh", "./geth-entrypoint" ]
+    volumes:
+      - /base/data:/data
+    env_file:
+      - .env.mainnet
+  node:
+    build: ../deps/node/
+    depends_on:
+      - geth
+    ports:
+      - 127.0.0.1:7545:8545     # RPC
+      - 127.0.0.1:9222:9222     # P2P TCP
+      - 127.0.0.1:9222:9222/udp # P2P UDP
+      - 127.0.0.1:7300:7300     # metrics
+      - 127.0.0.1:6060:6060     # pprof
+    command: [ "sh", "./op-node-entrypoint" ]
+    env_file:
+      - $PWD/.env.mainnet
