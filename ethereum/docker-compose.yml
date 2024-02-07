@@ -10,7 +10,7 @@ services:
 
   # Secondary Ethereum instance
   geth:
-    image: ethereum/client-go:v1.10.26
+    image: ethereum/client-go:latest
     restart: always
     container_name: geth
     network_mode: host
@@ -29,24 +29,24 @@ services:
         --authrpc.jwtsecret=/jwtsecret
         --authrpc.port 8553
         --authrpc.addr=0.0.0.0
-        --authrpc.vhosts=vitalik2.tradingstrategy.ai
-        -cache 8000
-        --txlookuplimit 0
+        --authrpc.vhosts=vitalik4.tradingstrategy.ai
+        --cache 8000
+        --history.transactions 0
         --syncmode snap
     volumes:
-      - ./data/geth:/root/.ethereum
+      - /node/ethereum/geth:/root/.ethereum
       # ETH2 beacon chain node secret file for AuthRPC.
       # Share with your beacon client.
       # Generate this file: openssl rand -hex 32 > jwtsecret
       # and share to beacon chain node.
-      - ./jwtsecret:/jwtsecret
+      - /node/ethereum/jwtsecret:/jwtsecret
 
   # Beacon chain node using Lighthouse.
   # This node does not publicly expose any RPC servers
   # and only connects to above nodes using authrpc.
   lighthouse:
     container_name: lighthouse
-    image: sigp/lighthouse:v3.3.0
+    image: sigp/lighthouse:latest
     restart: always
     # Pridileged needed because of how Lighthouse is setting file system permissions.
     privileged: true
@@ -64,9 +64,9 @@ services:
        --http-address=0.0.0.0
        --http-port=5052
        --http-allow-origin=*
-       --execution-endpoint=http://vitalik2.tradingstrategy.ai:8553
+       --execution-endpoint=http://vitalik4.tradingstrategy.ai:8553
        --execution-jwt=/jwtsecret
-       --checkpoint-sync-url=$INFURA_URL
+       --checkpoint-sync-url=https://mainnet.checkpoint.sigp.io 
     ports:
       - 9000:9000/tcp
       - 9000:9000/udp
@@ -76,5 +76,5 @@ services:
     # Do a full backtrace when lighthouse crashes
       - RUST_BACKTRACE=full
     volumes:
-      - ./data/lighthouse:/root/.lighthouse
-      - ./jwtsecret:/jwtsecret
+      - /node/ethereum/lighthouse:/root/.lighthouse
+      - /node/ethereum/jwtsecret:/jwtsecret
