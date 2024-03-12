@@ -10,7 +10,7 @@ services:
 
   # Secondary Ethereum instance
   geth:
-    image: ethereum/client-go:latest
+    image: ethereum/client-go:stable
     restart: always
     container_name: geth
     network_mode: host
